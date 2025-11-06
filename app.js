@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const { connectDB } = require('./db');
-const Profile = require('./server/models/Profile');
+const Profile = require('./models/Profile');
 
 app.use(express.json()); // handle JSON body
 app.use(express.urlencoded({ extended: false }));
