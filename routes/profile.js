@@ -2,7 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const Profile = require('../server/models/Profile.js');
+const Profile = require('../models/Profile');
+
 
 router.post('/', async (req, res) => {
   try {
