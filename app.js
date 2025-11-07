@@ -6,10 +6,9 @@ const port = process.env.PORT || 3000;
 const { connectDB } = require('./db');
 const Profile = require('./models/profile');
 
-app.use(express.json()); // handle JSON body
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// set the view engine to ejs
 app.set('view engine', 'ejs');
 
 app.use('/', require('./routes/profile')());
@@ -35,8 +34,7 @@ async function seedDefaultProfile() {
     }
 }
 
-// start app after DB connected
-(async () => {
+async function startServer() {
     try {
         await connectDB();
         await seedDefaultProfile();
@@ -48,6 +46,10 @@ async function seedDefaultProfile() {
         console.error('Failed to start app', err);
         process.exit(1);
     }
-})();
+}
 
-module.exports = app; 
+if (require.main === module && process.env.NODE_ENV !== 'test') {
+    startServer();
+}
+
+module.exports = app;
