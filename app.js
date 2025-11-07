@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const { connectDB } = require('./db');
-const Profile = require('./models/Profile');
+const Profile = require('./models/profile');
 
 app.use(express.json()); // handle JSON body
 app.use(express.urlencoded({ extended: false }));
@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 
 app.use('/', require('./routes/profile')());
+app.use('/api/users', require('./routes/users'));
+app.use('/api/comments', require('./routes/comments'));
 
 async function seedDefaultProfile() {
     const count = await Profile.countDocuments();
